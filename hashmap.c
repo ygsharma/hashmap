@@ -246,6 +246,11 @@ void hmap_free(hashmap* map) {
 }
 
 void hmap_freeDeep(hashmap* map) {
+
+    if (!map) {
+        return;
+    }
+
     for (unsigned int i = 0; i < map->numBuckets; i++) {
         if (map->buckets[i]) {
             hmap_freeEntryDeep(map->buckets[i]);
@@ -275,6 +280,7 @@ void hmap_freeEntryDeep(mapentry* entry) {
 
         free(entry->key);
         free(entry->val);
+        
     }
 }
 
